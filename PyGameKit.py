@@ -22,6 +22,7 @@ class Game:
         pygame.init()
         self.screen = pygame.display.set_mode(screen_size, vsync=vsync, flags=pygame.SCALED)
         self.clock = pygame.time.Clock()
+        pygame.display.set_caption("PyGameKit Window")
 
     def start(self):
         # This method can be overridden by the user for initialization
@@ -47,9 +48,6 @@ class Game:
 
 
 # ----- All Fuunctions are listed below ------ #
-def screen(screen_size: tuple[int, int], vsync: bool = False):
-    return pygame.display.set_mode(screen_size, vsync=vsync)
-
 def title(title):
     pygame.display.set_caption(title)
 
