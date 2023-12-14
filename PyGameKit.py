@@ -75,7 +75,7 @@ def line(color, start, end, width, screen=None):
         print(f"Error in line: {e}")
         exit(1)
 
-def rect(color, rect, screen=None): 
+def rect(rect, color, screen=None): 
     if screen == None:
         screen = pygame.display.get_surface()
     try:
@@ -87,7 +87,7 @@ def rect(color, rect, screen=None):
         print(f"Error in rect: {e}")
         exit(1)
 
-def circle(color, center, radius, screen=None):
+def circle(center, radius, color, screen=None):
     if screen == None:
         screen = pygame.display.get_surface()
     try:
@@ -96,7 +96,7 @@ def circle(color, center, radius, screen=None):
         print(f"Error in circle: {e}")
         exit(1)
 
-def ellipse(color, rect, screen=None):
+def ellipse(rect, color, screen=None):
     if screen == None:
         screen = pygame.display.get_surface()
     try:
@@ -105,7 +105,7 @@ def ellipse(color, rect, screen=None):
         print(f"Error in ellipse: {e}")
         exit(1)
 
-def arc(color, rect, start, stop, screen=None):
+def arc(rect, start, stop, color, screen=None):
     if screen == None:
         screen = pygame.display.get_surface()
     try:
