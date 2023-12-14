@@ -52,6 +52,7 @@ PyGameKit.title("Example")
 # [...]
 ```
 <h4> update_screen </h4> Equivalent to pygame.display.flip() <br> Makes the screen visible.
+
 ```python
 # [...]
 PyGameKit.update_screen()
@@ -60,6 +61,7 @@ PyGameKit.update_screen()
 <h4> background </h4>
 <p> Argument list: color, screen(optional) </p>
 Changes the background of the screen to a certain color. The color is the same as pygame.
+
 ```python
 PyGameKit.background( (0, 0, 0) ) # Black Background
 ```
