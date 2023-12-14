@@ -64,7 +64,7 @@ def background(color, screen=None):
         exit(1)
 
 # ----- Drawing Functions -----
-def line(color, start, end, width, screen=None):
+def line(start, end, color, width, screen=None):
     if screen == None:
         screen = pygame.display.get_surface()
     try:
@@ -73,14 +73,18 @@ def line(color, start, end, width, screen=None):
         print(f"Error in line: {e}")
         exit(1)
 
-def rect(rect, color, screen=None): 
+def rect(rect, color, corner_radius=0, width=0, screen=None): 
     if screen == None:
         screen = pygame.display.get_surface()
     try:
+        
         if type(rect) == Rect:
-            pygame.draw.rect(screen, color, rect)
+            if width==0:
+                pygame.draw.rect(screen, color, rect, corner_radius)
+            else:
+                pygame.draw.rect(screen, color, rect, corner_radius, width)
         else:
-            pygame.draw.rect(screen, color, (rect[0], rect[1], rect[2], rect[3]))
+            pygame.draw.rect(screen, color, (rect[0], rect[1], rect[2], rect[3]), corner_radius, width)
     except Exception as e:
         print(f"Error in rect: {e}")
         exit(1)

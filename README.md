@@ -42,7 +42,31 @@ self.[variable_name] = value
 
 <p> This ensures that the variable is transferred over to the update function too. </p>
 
-<h2> PyGameKit Functions, their Functionalities and their Examples. </h3>
+## Key Features
+
+<h3> delayed_keypress </h3>
+<p> This function checks if a specified key is pressed after a certain delay. This can be useful in many scenarios where the normal keypress function is outputting too fast. You can specify your own delay here. </p>
+
+```python
+from PyGameKit import delayed_keypress
+
+if delayed_keypress('SPACE', 500):  # Check if SPACE key is pressed after a delay of 500 milliseconds
+    # Your code here
+
+```
+
+<h3> delayed_mouse_press </h3>
+<p> Same thing as the delayed_keypress but for mouse presses. </p>
+
+```python
+from PyGameKit import delayed_mouse_pressed
+
+if delayed_mouse_pressed(500)[0]:  # Check if the left mouse button is pressed after a delay of 500 milliseconds
+    # Your code here
+
+```
+
+## PyGameKit Functions, their Functionalities and their Examples.
 <h3> Screen Functions </h3> 
 <h4> title </h4> Changes the title of the Game Window. <br>By Default it is: PyGameKit Window.
 
@@ -67,3 +91,19 @@ PyGameKit.background( (0, 0, 0) ) # Black Background
 ```
 
 <h3> Drawing Functions </h3>
+<h4> line </h4>
+<p> Argument list: start, end, color, width, screen(optional) </p>
+<p> Draws a line from start to end with width. </p>
+
+```python
+PyGameKit.line( (100, 100), (200, 200), (100, 200, 255), 5, surface ) # Draws a blue line from 100, 100 to 200, 200 on the screen called 'surface'
+```
+
+<h4> rect </h4>
+<p> Argument list: rect, color, corner_radius, width, screen(optional) </p>
+<p> Draws a rect with the given color, corner_radius and width </p>
+<p> Note: If width is 0, then the width argument is ignored. </p>
+
+```python
+PyGameKit.rect( (100, 100, 200, 200), (100, 200, 255), 5, 10)
+```
