@@ -80,11 +80,11 @@ def rect(rect, color, corner_radius=0, width=0, screen=None):
         
         if type(rect) == Rect:
             if width==0:
-                pygame.draw.rect(screen, color, rect, corner_radius)
+                pygame.draw.rect(screen, color, rect, border_radius=corner_radius)
             else:
-                pygame.draw.rect(screen, color, rect, corner_radius, width)
+                pygame.draw.rect(screen, color, rect, border_radius=corner_radius, width=width)
         else:
-            pygame.draw.rect(screen, color, (rect[0], rect[1], rect[2], rect[3]), corner_radius, width)
+            pygame.draw.rect(screen, color, (rect[0], rect[1], rect[2], rect[3]), border_radius=corner_radius, width=width)
     except Exception as e:
         print(f"Error in rect: {e}")
         exit(1)
@@ -102,7 +102,14 @@ def ellipse(rect, color, screen=None):
     if screen == None:
         screen = pygame.display.get_surface()
     try:
-        pygame.draw.ellipse(screen, color, rect)
+        if type(rect) == Rect:
+            if len(rect) == 2:
+                raise ValueError("The Co-ordinates must have 4 elements")
+            pygame.draw.ellipse(screen, color, rect)
+        else:
+            if len(rect) == 2:
+                raise ValueError("The Co-ordinates must have 4 elements")
+            pygame.draw.ellipse(screen, color, (rect[0], rect[1], rect[2], rect[3]))
     except Exception as e:
         print(f"Error in ellipse: {e}")
         exit(1)
@@ -111,15 +118,20 @@ def arc(rect, start, stop, color, screen=None):
     if screen == None:
         screen = pygame.display.get_surface()
     try:
-        pygame.draw.arc(screen, color, rect, start, stop)
+        if type(rect) == Rect:
+            if len(rect) == 2:
+                raise ValueError("The Co-ordinates must have 4 elements")
+            pygame.draw.arc(screen, color, rect, start, stop)
+        else:
+            if len(rect) == 2:
+                raise ValueError("The Co-ordinates must have 4 elements")
+            pygame.draw.arc(screen, color, (rect[0], rect[1], rect[2], rect[3]), start, stop)
     except Exception as e:
         print(f"Error in arc: {e}")
         exit(1)
 
 # ----- Imaging Functions -----
-def load_image(filename: str, colorkey=None, screen=None):
-    if screen == None:
-        screen = pygame.display.get_surface()
+def load_image(filename: str, colorkey=None):
     try:
         image = pygame.image.load(filename)
         image = image.convert()
@@ -150,9 +162,8 @@ def display_image(surface: Surface, rect, screen=None):
         print(f"Error in display_image: {e}")
         exit(1)
 
-def scale(surface: Surface, size: tuple[int, int], screen=None):
-    if screen == None:
-        screen = pygame.display.get_surface()
+# ----- Transform Functions -----
+def scale(surface: Surface, size: tuple[int, int]):
     try:
         surface = pygame.transform.scale(surface, size)
     except Exception as e:
@@ -160,9 +171,7 @@ def scale(surface: Surface, size: tuple[int, int], screen=None):
         exit(1)
     return surface
 
-def rotate(surface: Surface, angle: int, screen=None):
-    if screen == None:
-        screen = pygame.display.get_surface()
+def rotate(surface: Surface, angle: int):
     try:
         surface = pygame.transform.rotate(surface, angle)
     except Exception as e:

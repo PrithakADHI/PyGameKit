@@ -3,9 +3,10 @@
 <p> Created as an Abstraction of Pygame to make development a bit easier for begineer Python Programmers. </p>
 <p> Uses Object-Oriented Concepts to create an Abstraction. </p>
 
-<h3> Documentation </h3>
+# Documentation
 <p> Before we overview the functionality of PyGameKit. Here are some basic codes: </p>
-<h4> Simple Program to draw a Rect </h4>
+
+## Simple Program to draw a Rect
 
 ```python
 import PyGameKit as pg
@@ -66,6 +67,57 @@ if delayed_mouse_pressed(500)[0]:  # Check if the left mouse button is pressed a
 
 ```
 
+<h3> Displaying Images is easier now </h3>
+<p> Now, all the images loaded in PyGameKit will normally follow the rect behaviour. It uses pygame.transform.smoothscale to fit the image into the given rect. </p>
+
+```python
+# This is the same as example.py
+import PyGameKit as pg
+
+class MyGame(pg.Game):
+    def start(self):
+        pg.title("Tests")
+        self.catx = 0
+        self.caty = 0
+    def update(self): # Game Loop
+        pg.background((0, 0, 0))
+
+        cat = pg.load_image("cat.png")
+
+        mx, my = pg.mouse_getpos()
+        mb = pg.mouse_pressed()
+
+        if mb[0]:
+            self.catx, self.caty = mx - (200 / 2), my - (200 / 2)
+
+        
+        pg.display_image(cat, (self.catx, self.caty, 200, 200))
+
+        pg.update_screen()
+
+MyGame((800, 600), True).run()
+```
+
+
+<h3> Compatibility with PyGame </h3>
+<p> You can write the same kind of PyGame Programs with PyGameKit with no problems.</p>
+
+```python
+import PyGameKit as pg
+screen = pg.display.set_mode((800, 600))
+
+while True:
+    for event in pg.events.get():
+        if event.type == pg.QUIT:
+            pg.quit()
+            exit()
+    
+    pg.draw.rect((100, 100, 200, 200), (100, 200, 255))
+
+```
+
+And this works as intented. <br>
+
 ## PyGameKit Functions, their Functionalities and their Examples.
 <h3> Screen Functions </h3> 
 <h4> title </h4> Changes the title of the Game Window. <br>By Default it is: PyGameKit Window.
@@ -107,3 +159,73 @@ PyGameKit.line( (100, 100), (200, 200), (100, 200, 255), 5, surface ) # Draws a 
 ```python
 PyGameKit.rect( (100, 100, 200, 200), (100, 200, 255), 5, 10)
 ```
+
+<h4> circle </h4>
+<p> Argument list: center, radius, color, screen(optional) </p>
+<p> Draws a circle in the center co-ordinate with the radius and color. </p>
+
+```python
+PyGameKit.circle( (100, 100), 50, (100, 200, 255) )
+```
+
+<h4> ellipse </h4>
+<p> Argument list: rect, color, screeen(optional) </p>
+<p> Draws an ellipse around the rect with the given color. </p>
+
+```python
+PyGameKit.ellipse(( 100, 100, 200, 300 ), (100, 200, 255))
+```
+
+<h4> arc </h4>
+<p> Argument List: rect, start, stop, color, screen(optional) </p>
+
+```python
+PyGameKit.arc( (100, 100, 200, 200), 0, 180 )
+```
+
+## Imaging Functions
+
+<h4> load_image </h4>
+<p> Argument list: filename, colorkey </p>
+
+Loads the image and stores it into the given variable. If a color key is given, returns a transparent image. 
+
+
+```python
+img = PyGameKit.load_image("cat.png")
+```
+
+<h4> display_image </h4>
+<p> Argument list: surface, rect, screen(optional) </p>
+
+Displays the before-mentioned image on a rect. It can also display any surface as required.
+
+```python
+img = PyGameKit.load_image("cat.png")
+PyGameKit.display_image(img, (100, 100, 200, 200)) # <- The rect can also have two arguments, in which case it won't be scaled. 
+```
+
+## Transform Functions
+
+<h4> scale </h4>
+<p> Argument list: surface, size </p>
+Scales the surface into the required size. This is the non-smooth variant.
+
+```python
+img = PyGameKit.load_image("cat.png")
+img = PyGameKit.scale(img, (200, 200))
+PyGameKit.display_image(img, (100, 100))
+```
+
+<h4> smoothscale </h4>
+<p> Argument list: surface, size </p>
+Scales the surface into the required size. This is the smooth variant.
+
+```python
+img = PyGameKit.load_image("cat.png")
+img = PyGameKit.smoothscale(img, (200, 200))
+PyGameKit.display_image(img, (100, 100))
+```
+
+<h4> rotate </h4>
+<p> Argument list: surface, angle
