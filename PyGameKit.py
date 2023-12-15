@@ -5,7 +5,7 @@ Created to make Development on Pygame simpler for beginners
 
 Originally Developed by: Prithak Adhikari
 
-Github: https://github.com/PrithakADHI/
+Github: https://github.com/PrithakADHI/PyGameKit
 
 """
 
@@ -14,14 +14,19 @@ import sys
 
 from pygame.sprite import Sprite
 from pygame import *
-
+import math
 last_time = pygame.time.get_ticks()
 
 class Game:
-    def __init__(self, screen_size: tuple[int, int], vsync: bool = False):
+    def __init__(self, screen_size: tuple[int, int], vsync: bool = False, fullscreen: bool = False, fps: int = 60):
         pygame.init()
-        self.screen = pygame.display.set_mode(screen_size, vsync=vsync, flags=pygame.SCALED)
+        if fullscreen:
+            self.screen = pygame.display.set_mode(screen_size, vsync=vsync, flags=pygame.FULLSCREEN)
+        else:
+            self.screen = pygame.display.set_mode(screen_size, vsync=vsync, flags=pygame.SCALED)
         self.clock = pygame.time.Clock()
+        self.fps = fps
+
         pygame.display.set_caption("PyGameKit Window")
 
     def start(self):
@@ -32,7 +37,7 @@ class Game:
         # This method can be overridden by the user for the game loop
         pass
 
-    def run(self, fps=60):
+    def run(self):
         self.start()
         while True:
             for event in pygame.event.get():
@@ -44,7 +49,7 @@ class Game:
             except Exception as e:
                 print(f"Error in run: {e}")
                 exit(1)
-            self.clock.tick(fps)
+            self.clock.tick(self.fps)
 
 
 # ----- All Fuunctions are listed below ------ #
@@ -179,11 +184,9 @@ def rotate(surface: Surface, angle: int):
         exit(1)
     return surface
 
-def flip(surface: Surface, flipcode: int, screen=None):
-    if screen == None:
-        screen = pygame.display.get_surface()
+def flip(surface: Surface, flip_x:bool = False, flip_y:bool = False):
     try:
-        surface = pygame.transform.flip(surface, flipcode)
+        surface = pygame.transform.flip(surface, flip_x, flip_y)
     except Exception as e:
         print(f"Error in flip: {e}")
         exit(1)
@@ -264,9 +267,9 @@ def mouse_mov(): # pygame.mouse.get_rel()
         print(f"Error in move_mov: {e}")
         exit(1)
 
-def mouse_setpos():
+def mouse_setpos(co: tuple[int, int]):
     try:
-        pygame.mouse.set_pos()
+        pygame.mouse.set_pos(co)
     except Exception as e:
         print(f"Error in mouse_setpos: {e}")
         exit(1)

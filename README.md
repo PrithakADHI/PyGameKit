@@ -3,6 +3,10 @@
 <p> Created as an Abstraction of Pygame to make development a bit easier for begineer Python Programmers. </p>
 <p> Uses Object-Oriented Concepts to create an Abstraction. </p>
 
+## Installation
+
+Currently working on implementing it in PyPI. But for now, you can download the repo and copy over the PyGameKit to your Desired Location and just import it that way. 
+
 # Documentation
 <p> Before we overview the functionality of PyGameKit. Here are some basic codes: </p>
 
@@ -28,12 +32,6 @@ Game((800, 600)).run()
 PyGameKit creates a game loop by itself through the run method down below. The Developer now doesn't have to remember
 as much boiler-plate code as before in pygame. If they have some knowledge in OOP, they can grasp this pretty easily. </p>
 
-<p> The Game Function has a init function which has two values: the screen size and whether you want vsync on or off. To
-turn on Vsync you can: </p>
-
-```python
-Game((800, 600), vsync=True).run()
-```
 
 <p> Declaration of variables is simple. Declare all the variables you need in the start function using: </p>
 
@@ -42,6 +40,36 @@ self.[variable_name] = value
 ```
 
 <p> This ensures that the variable is transferred over to the update function too. </p>
+
+## The PyGameKit Game Class
+
+This is basically the main class of PyGameKit. And this can take these arguments while being called. 
+
+<p> screen_size: Specifies the screen size of the window. </p><br>
+<p> vsync: Specifies if the window should have vsync or not. It's a boolean. By default it's False. </p><br>
+<p> fullscreen: Specifies if the window should be fullscreen or not. It's a boolean. By default, it's False. </p><br>
+<p> fps: Specifies the fps of the window. By default it's 60. </p><br>
+
+<p> You can call it using: 
+
+```python
+import PyGameKit
+class MyGame(PyGameKit.Game):
+    def update(self):
+        # [...] your code.
+        pass
+
+MyGame( (800, 600), vsync=True, fullscreen=False, fps=120 ).run()
+
+```
+
+## The Methods
+
+<p> start(): To be overriden. This will be called for one frame once the program has been run. Can be used to declare variables. </p> <br>
+
+<p> update(): To be overriden. This is the main game loop. All of the main code shall be written here. </p>
+
+<p> run(): This function should be called to actually run the program. </p>
 
 ## Key Features
 
@@ -228,4 +256,105 @@ PyGameKit.display_image(img, (100, 100))
 ```
 
 <h4> rotate </h4>
-<p> Argument list: surface, angle
+<p> Argument list: surface, angle </p>
+Rotates the surface into the specified angle. The angle is in degrees.
+
+```python
+img = PyGameKit.load_image("cat.png")
+img = PyGameKit.rotate(img, 180)
+PyGameKit.display_image(img, (100, 100, 200, 200))
+```
+
+<h4> flip </h4>
+<p> Argument list: surface, flip_x, flip_y </p>
+Flips the image according to the booleans flip_x and flip_y. 
+
+```python
+img = PyGameKit.load_image("cat.png")
+img = PyGameKit.flip(img, flip_x=True, flip_y=True)
+PyGameKit.display_image(img, (100, 100, 200, 200))
+```
+
+## Key Handling Functions
+
+<h4> keypress </h4>
+<p> Argument list: keycode </p>
+Checks if the keycode is pressed or not and correspondingly returns True or False.
+
+```python
+if PyGameKit.keypress("W"):
+    # [...] your code
+```
+The Key Codes are all same to Pygame but with the removal of 'K_'. For Example, The Escape Key will be ESC as opposed to 'K_ESC'. Also, no need to worry about upper and lower case because PyGameKit automatically sets it to lowercase.
+
+<h4> delayed_keypress </h4>
+<p> Argument list: keycode, delay </p>
+Same Functionality as keypress but with a specified delay. The delay is in milliseconds.
+
+```python
+if PyGameKit.delayed_keypress("W", 200): # Checks for keypress every 200 ms
+    # [...] your code
+```
+
+## Mouse Handling Functions
+
+<h4> mouse_getpos </h4>
+<p> returns both x and y positions of the mouse in the screen. </p>
+
+```python
+mx, my = PyGameKit.mouse_getpos()
+```
+
+<h4> mouse_pressed </h4>
+<p> returns a tuple (left: bool, middle: bool, right: bool). If left is True, the left mouse button has been pressed, if middle is true then the middle mouse button is pressed and if right is True then the right mouse button is pressed. </p>
+
+
+```python
+mb = PyGameKit.mouse_pressed()
+if mb[0]:
+    # The Left Mouse has been clicked.
+    pass
+```
+
+<h4> delayed_mouse_press </h4>
+<p> Argument list: delay </p>
+Same thing as mouse_pressed but adds a specified delay to the function. The delay is in milliseconds.
+
+```python
+mb = PyGameKit.delayed_mouse_press(200)
+if mb[2]:
+    # The Right Mouse has been clicked.
+    pass
+```
+
+<h4> mouse_mov </h4>
+<p> Equivalent to pygame.mouse.get_rel(). Returns the amount of movement in the mouse from the last time this function was called. </p>
+
+
+```python
+mv = PyGameKit.mouse_mov()
+```
+
+<h4> mouse_setpos </h4>
+<p> Argument list: co_ordinates </p>
+Sets the mouse position to the specified co-ordinates. 
+
+```python
+PyGameKit.mouse_setpos((200, 200)) # Don't do this lmao
+```
+
+<h4> mouse_setvis </h4>
+<p> Argument list: value </p>
+Sets the visiblity of the mouse. If False, it will make the mouse invisible inside the window.
+
+```python
+PyGameKit.mouse_setvis(False)
+```
+
+<h4> mouse_getvis </h4>
+<p> Gets the visiblity of the mouse. If False, the mouse is invisible and if True, the mouse is visible. </p>
+
+
+```python
+mouse_visibility = PyGameKit.mouse_getvis()
+```
