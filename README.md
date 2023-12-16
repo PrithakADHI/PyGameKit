@@ -49,10 +49,10 @@ self.[variable_name] = value
 
 This is basically the main class of PyGameKit. And this can take these arguments while being called. 
 
-<p> screen_size: Specifies the screen size of the window. </p><br>
-<p> vsync: Specifies if the window should have vsync or not. It's a boolean. By default it's False. </p><br>
-<p> fullscreen: Specifies if the window should be fullscreen or not. It's a boolean. By default, it's False. </p><br>
-<p> fps: Specifies the fps of the window. By default it's 60. </p><br>
+<p> screen_size: Specifies the screen size of the window. </p>
+<p> vsync: Specifies if the window should have vsync or not. It's a boolean. By default it's False. </p>
+<p> fullscreen: Specifies if the window should be fullscreen or not. It's a boolean. By default, it's False. </p>
+<p> fps: Specifies the fps of the window. By default it's 60. </p>
 
 <p> You can call it using: 
 
@@ -69,7 +69,7 @@ MyGame( (800, 600), vsync=True, fullscreen=False, fps=120 ).run()
 
 ## The Methods
 
-<p> start(): To be overriden. This will be called for one frame once the program has been run. Can be used to declare variables. </p> <br>
+<p> start(): To be overriden. This will be called for one frame once the program has been run. Can be used to declare variables. </p>
 
 <p> update(): To be overriden. This is the main game loop. All of the main code shall be written here. </p>
 
