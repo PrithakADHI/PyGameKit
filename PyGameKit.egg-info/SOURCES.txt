@@ -1,0 +1,9 @@
+README.md
+setup.py
+PyGameKit/__init__.py
+PyGameKit/main.py
+PyGameKit.egg-info/PKG-INFO
+PyGameKit.egg-info/SOURCES.txt
+PyGameKit.egg-info/dependency_links.txt
+PyGameKit.egg-info/requires.txt
+PyGameKit.egg-info/top_level.txt
