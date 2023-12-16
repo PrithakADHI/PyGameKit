@@ -5,7 +5,11 @@
 
 ## Installation
 
-Currently working on implementing it in PyPI. But for now, you can download the repo and copy over the PyGameKit to your Desired Location and just import it that way. 
+Installation can be done using pip.
+
+```python
+pip install PyGameKit
+```
 
 # Documentation
 <p> Before we overview the functionality of PyGameKit. Here are some basic codes: </p>
